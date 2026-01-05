@@ -1,0 +1,56 @@
+
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h1>lucky : {{ luckyNumber }}</h1>
+        <p>{{updateRandomNumber()}}</p>
+        <p>salary:{{employee.salary}}</p>
+    </div>
+</body>
+
+<script>
+    const { createApp , ref } = Vue;
+
+    createApp({
+        setup() {
+            const message = "Hello Vue 3 with Composition API!";
+            //for dynamic data we use ref
+            let luckyNumber=ref(6);
+
+            const employee=ref({
+                name:"something",
+                age:23,
+                salary:34000
+            })
+
+            function updateRandomNumber() {
+                setTimeout(()=>{
+                    luckyNumber.value=77;
+                    //mkae sure to add .value if we are using the ref but not in case of reactive lets see in the reactive.html
+                    employee.value.salary=45000;
+                },2000);
+            }
+
+            return {
+                message,
+                luckyNumber,
+                employee,
+                updateRandomNumber
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>

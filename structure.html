@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <p>{{something}}</p>
+        <p>{{array}}</p>
+        <p>{{employee}}</p>
+        <p>{{employee.name}} is {{employee.age}}yr old</p>
+    </div>
+</body>
+<script>
+    // createApp is a function that creates a new Vue application
+    const { createApp } = Vue;
+
+
+
+    createApp({
+        setup() {
+            const something = "something else";
+            const array = [1, 2, 3, 4, 5];
+            const employee = {
+                name: "something",
+                age: 23,
+                salary: 34000
+            }
+            return {
+                message: "something something",
+                //we need to consume it inside the app if we are to use it in the template
+                something,
+                array,
+                employee
+            }
+        }
+    }).mount("#app");
+
+    // we need to use .mount to mount the app to a specific element in the DOM  
+</script>
+
+</html>
