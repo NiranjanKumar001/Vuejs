@@ -1,0 +1,54 @@
+
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h1 >lucky : {{ luckyNumber }}</h1>
+        <p>salary:{{employee.salary}}</p>
+
+        // it gets removed from the dom if the condition is false
+        <p v-if="employee.hasCorporateCard">spendinglimits :{{employee.spendingLimit}}</p>
+        </div>
+
+        // it gets hidden from the dom if the condition is false only display:none is applied
+        <p v-show="employee.hasCorporateCard">spendinglimits :{{employee.spendingLimit}}</p>
+        </div>
+</body>
+
+<script>
+    const { createApp , ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            const message = "Hello Vue 3 with Composition API!";
+            let luckyNumber=[3,4,6,7,8];
+
+            const employee=reactive({
+                name:"something",
+                age:23,
+                salary:34000,
+                hasCorporateCard:false,
+                spendingLimit:5000,
+                yearswithCompany:2,
+            });
+
+            return {
+                message,
+                employee
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
