@@ -1,0 +1,68 @@
+
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-html to render necessary HTML tags -->
+        <h1 v-html="getmessage()"></h1>
+        <h1 v-once>lucky : {{ luckyNumber }}</h1>
+        <h1 >lucky : {{ luckyNumber }}</h1>
+        <p>{{updateRandomNumber()}}</p>
+        <p>salary:{{employee.salary}}</p>
+    </div>
+</body>
+
+<script>
+    const { createApp , ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            const message = "Hello Vue 3 with Composition API!";
+            //for dynamic data we use ref
+            let luckyNumber=ref(6);
+
+            // in the reactive we dont need to use .value to access the properties
+            // but will not not accept primitive data types like ref does
+
+            //reactive cannt be reassigned like ref
+            //example: luckyNumber=10; //invalid
+            //example: employee={name:"new name"}; //invalid
+
+            const employee=reactive({
+                name:"something",
+                age:23,
+                salary:34000
+            })
+
+            function updateRandomNumber() {
+                setTimeout(()=>{
+                    luckyNumber.value=77;
+                    employee.salary=45000;
+                },2000);
+            }
+
+            function getmessage() {
+                return `<h1><u>This is message from function</u></h1>`;
+            }
+
+            return {
+                getmessage,
+                luckyNumber,
+                employee, 
+                updateRandomNumber
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
