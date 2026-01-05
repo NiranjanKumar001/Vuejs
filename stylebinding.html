@@ -1,0 +1,40 @@
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div style="background-color: rgb(221, 151, 46); font-size: 40px;">
+            hello world
+        </div>
+        <!-- that was normal inline style but now using style binding -->
+        <div v-bind:style="{backgroundColor: 'white', fontSize:'40px'}">
+            hello world
+        </div>
+        <div style="background-color: rgb(47, 202, 16); font-size: 40px;">
+            hello world
+        </div>
+    </div>
+</body>
+
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+
+            return {
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
