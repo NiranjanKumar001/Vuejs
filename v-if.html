@@ -22,6 +22,8 @@
         <!-- // it gets removed from the dom if the condition is false -->
         <p v-if="employee.hasCorporateCard">spendinglimits :{{employee.spendingLimit}}</p>
         </div>
+        <p v-else="employee.hasCorporateCard">no card</p>
+        </div>
         
         </div>
 </body>
