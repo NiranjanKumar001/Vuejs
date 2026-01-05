@@ -13,8 +13,15 @@
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
-        <h1 v-for="luckyNumber">lucky : {{ luckyNumber }}</h1>
         <h1 v-for="(luckyNumber,index) in luckyNumber">{{index}}=lucky : {{ luckyNumber }}</h1>
+        <p>projects in pipeline</p>
+        <ul>
+            <li v-for="(project,index) in employee.projects">
+                <span>
+                    {{index+1}}-"{{project.name}}" : duration -{{project.duration}}
+                </span>
+            </li>
+        </ul>
     </div>
 </body>
 
