@@ -1,0 +1,65 @@
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h1 v-for="(luckyNumber,index) in luckyNumber">{{index}}=lucky : {{ luckyNumber }}</h1>
+        <p>projects in pipeline</p>
+        <ul>
+            <li v-for="(project,index) in employee.projects">
+                <span>
+                    {{index+1}}-"{{project.name}}" : duration -{{project.duration}}
+                </span>
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(value,key) in employee">
+                <span >
+                    {{key}} : {{value}}
+                </span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            const message = "Hello Vue 3 with Composition API!";
+            let luckyNumber = [3, 4, 6, 7, 8];
+
+            const employee = reactive({
+                name: "something",
+                age: 23,
+                salary: 34000,
+                hasCorporateCard: false,
+                spendingLimit: 5000,
+                yearswithCompany: 2,
+                projects: [{ name: "projectA", duration: "6 months" },
+                { name: "projectB", duration: "3 months" },
+                { name: "projectC", duration: "1 year" }], //array of objects
+            });
+
+            return {
+                message,
+                employee,
+                luckyNumber
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
