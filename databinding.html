@@ -1,0 +1,45 @@
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            Learn Vue 3
+        </div>
+        <input type="text" v-model="name" />
+        <!-- spaces will be trimmed -->
+        <input type="text" v-model.trim="name" />
+
+        <input type="number" v-model.number="age" />
+        <p>Name: {{ name }}, Age: {{ age }}</p>
+         this updates when we click on the input after assigning value
+        <input type="number" v-model.lazy="age" />
+        <p>Name: {{ name }}, Age: {{ age }}</p>
+    </div>
+</body>
+
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            let name=ref("Vue 3 Composition API");
+            let age=ref(32);
+            
+            return {
+                name,age
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
