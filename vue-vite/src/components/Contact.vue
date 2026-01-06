@@ -1,5 +1,11 @@
 <template>
-    <div class="page-container">
+    <div class="page-container" :class="theme + '-theme'">
+        <div class="theme-controls">
+            <button @click="toggleTheme" class="theme-btn">
+                Switch to {{ theme === 'light' ? 'Dark' : 'Light' }} Mode
+            </button>
+        </div>
+        
         <Card title="Contact Form">
             <div v-if="!submitted">
                 <form @submit.prevent="submitForm">
@@ -49,11 +55,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, provide, reactive } from 'vue';
 import Card from './Card.vue';
 import LuckyNumber from './LuckyNumber.vue';
 
-// Basic form data
+const theme = ref('light');
+const userData = reactive({
+    name: '',
+    email: '',
+    phone: ''
+});
+
+function toggleTheme() {
+    theme.value = theme.value === 'light' ? 'dark' : 'light';
+}
+
+provide('theme', {
+    current: theme,
+    toggle: toggleTheme
+});
+
+provide('userData', userData);
+
 const name = ref('');
 const email = ref('');
 const phone = ref('');
@@ -61,7 +84,6 @@ const message = ref('');
 const submitted = ref(false);
 const isLoading = ref(false);
 
-// Simple error tracking
 const errors = ref({
     name: '',
     email: '',
@@ -113,6 +135,10 @@ async function submitForm() {
         return;
     }
 
+    userData.name = name.value;
+    userData.email = email.value;
+    userData.phone = phone.value;
+
     isLoading.value = true;
 
     setTimeout(() => {
@@ -136,6 +162,39 @@ function resetForm() {
     max-width: 600px;
     margin: 30px auto;
     padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.light-theme {
+    background: #ffffff;
+    color: #333;
+}
+
+.dark-theme {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+.theme-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.theme-btn {
+    background: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dark-theme .theme-btn {
+    background: #e74c3c;
+}
+
+.theme-btn:hover {
+    opacity: 0.8;
 }
 
 
