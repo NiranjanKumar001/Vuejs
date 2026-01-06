@@ -1,24 +1,14 @@
 <template>
     <div>
-       {{message}}
+        {{ message }}
     </div>
     <contact-us></contact-us>
     <button-counter></button-counter>
 </template>
 
-<script>
+<script setup>
 import ButtonCounter from './components/ButtonCounter.vue';
-
-    export default{
-        setup(){
-            const message="hello vue";
-            return{
-                message
-            };
-        }
-    }
+const message = "hello vue";
 </script>
 
-<style>
-
-</style>
+<style></style>

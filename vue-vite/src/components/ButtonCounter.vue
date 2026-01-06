@@ -1,14 +1,7 @@
 <template>
     <button @click="count++"> clicked {{ count }} times</button>
 </template>
-<script>
-    import { ref } from "vue";
-    export default {
-        setup(){
-            const count =ref(0);
-            return{
-                count
-            };
-        }
-    }
+<script setup>
+import { ref } from "vue";
+const count = ref(0);
 </script>

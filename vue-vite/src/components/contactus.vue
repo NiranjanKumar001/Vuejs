@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<script>
+<!-- <script>
     import { ref } from "vue";
     export default {
         setup(){
@@ -15,4 +15,12 @@
             };
         }
     }
+</script> -->
+
+<!-- better way which vue provides -->
+
+<script setup>
+    import {ref} from "vue";
+    const count =ref(0);
+    const email=ref("something@email.com");
 </script>
