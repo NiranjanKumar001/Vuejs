@@ -12,9 +12,9 @@
 
 <body>
     <div id="app">
-        <!-- also we have v-on:click.once  v-on:click.capture v-on:click.prevent    -->
-        <div v-on:click="buttonClicked('hello from div ',$event)">
+        <div>
             something exciting
+            <input type="text" v-on:keyup.enter="pressEnter" />
             <button v-on:click.stop="buttonClicked('Hello from button',$event)">Click Me</button>
             <p>X: {{ x }}, Y: {{ y }}</p>
         </div>
@@ -29,6 +29,10 @@
             let x=ref(0);
             let y=ref(0);
 
+            function pressEnter() {
+                alert('enter key passed');
+            }
+
             function buttonClicked(newMessage,event) {
                 x.value=event.x;
                 y.value=event.y;
@@ -37,7 +41,7 @@
             }
 
             return {
-                buttonClicked,x,y
+                buttonClicked,x,y,pressEnter
             }
         }
     }).mount("#app");
