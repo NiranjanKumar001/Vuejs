@@ -1,0 +1,42 @@
+<!-- function in vueJS 3 with composition API -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="buttonClicked('Hello from button',$event)">Click Me</button>
+        <p>X: {{ x }}, Y: {{ y }}</p>
+    </div>
+</body>
+
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+            let x=ref(0);
+            let y=ref(0);
+
+            function buttonClicked(newMessage,event) {
+                x.value=event.x;
+                y.value=event.y;
+                console.log(event);
+                // alert(newMessage);
+            }
+
+            return {
+                buttonClicked,x,y
+            }
+        }
+    }).mount("#app");
+</script>
+
+</html>
