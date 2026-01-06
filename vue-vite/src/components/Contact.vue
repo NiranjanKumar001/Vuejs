@@ -1,48 +1,57 @@
 <template>
-    <div class="contact-container">
-        <h2>Get in Touch</h2>
-        
-        <div v-if="!submitted">
-            <form @submit.prevent="submitForm">
-                <div class="form-group">
-                    <label>Name *</label>
-                    <input type="text" v-model="name" placeholder="Your name" :class="{error: errors.name}" @blur="checkName" />
-                    <span v-if="errors.name" class="error-msg">{{ errors.name }}</span>
-                </div>
-                
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" v-model="email" placeholder="your.email@example.com" :class="{error: errors.email}" @blur="checkEmail" />
-                    <span v-if="errors.email" class="error-msg">{{ errors.email }}</span>
-                </div>
-                
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" v-model="phone" placeholder="Your phone number (optional)" />
-                </div>
-                
-                <div class="form-group">
-                    <label>Message *</label>
-                    <textarea v-model="message" placeholder="What's on your mind?" :class="{error: errors.message}" @blur="checkMessage"></textarea>
-                    <span v-if="errors.message" class="error-msg">{{ errors.message }}</span>
-                </div>
-                
-                <button type="submit" :disabled="!canSubmit" class="submit-btn">
-                    {{ isLoading ? 'Sending...' : 'Send Message' }}
-                </button>
-            </form>
-        </div>
-        
-        <div v-else class="success-message">
-            <h3>Thanks!</h3>
-            <p>Got your message, {{ name }}. I'll get back to you soon!</p>
-            <button @click="resetForm" class="reset-btn">Send another message</button>
-        </div>
+    <div class="page-container">
+        <Card title="Contact Form">
+            <div v-if="!submitted">
+                <form @submit.prevent="submitForm">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" v-model="name" placeholder="Your name" :class="{ error: errors.name }"
+                            @blur="checkName" />
+                        <span v-if="errors.name" class="error-msg">{{ errors.name }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" v-model="email" placeholder="your.email@example.com"
+                            :class="{ error: errors.email }" @blur="checkEmail" />
+                        <span v-if="errors.email" class="error-msg">{{ errors.email }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" v-model="phone" placeholder="Your phone number (optional)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea v-model="message" placeholder="What's on your mind?" :class="{ error: errors.message }"
+                            @blur="checkMessage"></textarea>
+                        <span v-if="errors.message" class="error-msg">{{ errors.message }}</span>
+                    </div>
+
+                    <button type="submit" :disabled="!canSubmit" class="submit-btn">
+                        {{ isLoading ? 'Sending...' : 'Send Message' }}
+                    </button>
+                </form>
+            </div>
+
+            <div v-else class="success-message">
+                <h3>Thanks!</h3>
+                <p>Got your message, {{ name }}. I'll get back to you soon!</p>
+                <button @click="resetForm" class="reset-btn">Send another message</button>
+            </div>
+        </Card>
+
+        <Card title="Lucky Number Generator">
+            <LuckyNumber />
+        </Card>
     </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import Card from './Card.vue';
+import LuckyNumber from './LuckyNumber.vue';
 
 // Basic form data
 const name = ref('');
@@ -88,34 +97,30 @@ function checkMessage() {
 
 // Check if form can be submitted
 const canSubmit = computed(() => {
-    return name.value.trim() && 
-           email.value.trim() && 
-           email.value.includes('@') && 
-           message.value.trim() &&
-           !isLoading.value;
+    return name.value.trim() &&
+        email.value.trim() &&
+        email.value.includes('@') &&
+        message.value.trim() &&
+        !isLoading.value;
 });
 
-// Handle form submission
 async function submitForm() {
-    // Quick validation check
     checkName();
     checkEmail();
     checkMessage();
-    
+
     if (!canSubmit.value) {
         return;
     }
-    
+
     isLoading.value = true;
-    
-    // Simulate sending message (replace with real API call)
+
     setTimeout(() => {
         isLoading.value = false;
         submitted.value = true;
     }, 1500);
 }
 
-// Reset form to send another message
 function resetForm() {
     name.value = '';
     email.value = '';
@@ -126,15 +131,11 @@ function resetForm() {
 }
 </script>
 
-
 <style scoped>
-.contact-container {
-    max-width: 450px;
+.page-container {
+    max-width: 600px;
     margin: 30px auto;
-    padding: 25px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
 }
 
 
@@ -158,7 +159,8 @@ label {
 }
 
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 10px;
     border: 2px solid #ddd;
@@ -168,13 +170,15 @@ input, textarea {
 }
 
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: #007bff;
 }
 
 
-input.error, textarea.error {
+input.error,
+textarea.error {
     border-color: #dc3545;
 }
 
