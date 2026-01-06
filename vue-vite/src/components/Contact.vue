@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <h1>contact us</h1>
-        <p>please send email on {{email}}</p>
+    <div  class="bg-info p-3 m-3 border rounded">
+        <h3>Name: {{ props.name }}</h3>
+        <p>Email : {{ email }}</p>
+        <p>Phone : {{ props.phone }}</p>
     </div>
 </template>
 
@@ -20,7 +21,11 @@
 <!-- better way which vue provides -->
 
 <script setup>
-    import {ref} from "vue";
+    import {ref,defineProps} from "vue";
     const count =ref(0);
     const email=ref("something@email.com");
+    const props =defineProps([
+        "name",
+        "phone"
+    ])
 </script>
