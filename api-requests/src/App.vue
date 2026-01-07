@@ -19,10 +19,16 @@ import { reactive,onMounted } from 'vue';
 
   onMounted(async()=>{
 
+    // fetch("https://jsonplaceholder.typicode.com/users").then((response)=>response.json()).then((data)=>{
+    //   console.log(data);
+    //   userObj.users=data;
+    // });
+
     axios.get('https://jsonplaceholder.typicode.com/users')
     .then((response)=>{
       console.log(response.data);
       userObj.users=response.data;
     })
   })
+  
 </script>

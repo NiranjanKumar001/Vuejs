@@ -28,4 +28,5 @@ function generateLuckyNumber() {
   luckyNumber.value = Math.floor(Math.random() * maxNumber.value) ;
   console.log(luckyNumber.value);
 }
+
 </script>
