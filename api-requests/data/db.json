@@ -1,0 +1,32 @@
+{
+    "destination":[
+        {
+            "id": 1,
+            "name": "Paris",
+            "days": 5,
+            "funfacts":"The Eiffel Tower can be 15 cm taller during the summer due to thermal expansion of the metal.",
+            "price": 1200
+        },
+        {
+            "id": 2,
+            "name": "New York",
+            "days": 7,
+            "funfacts":"New York City was the first capital of the United States.",
+            "price": 1500
+        },
+        {
+            "id": 3,
+            "name": "Tokyo",
+            "days": 6,
+            "funfacts":"Tokyo is the world's largest metropolitan area, with over 37 million residents in the greater Tokyo area.",
+            "price": 1800
+        },
+        {
+            "id": 4,
+            "name": "Sydney",
+            "days": 8,
+            "funfacts":"The Sydney Opera House has over 1 million roof tiles, each one unique.",
+            "price": 2000
+        }
+    ]
+}
