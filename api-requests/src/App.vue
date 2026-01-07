@@ -2,7 +2,7 @@
   <div>
     Travelopedia
   </div>
-  <hr/>
+  <hr />
   <table class="table table-striped table-light">
     <thead>
       <tr>
@@ -31,24 +31,28 @@
 </template>
 <script setup>
 import axios from 'axios';
-import { reactive,onMounted } from 'vue';
+import { reactive, onMounted } from 'vue';
 
-  const destinationObj=reactive({
-    destinationList:[],
-  });
+const destinationObj = reactive({
+  destinationList: [],
+});
 
-  onMounted(async()=>{
+onMounted(async () => {
 
-    // fetch("https://jsonplaceholder.typicode.com/users").then((response)=>response.json()).then((data)=>{
-    //   console.log(data);
-    //   userObj.users=data;
-    // });
+  // fetch("https://jsonplaceholder.typicode.com/users").then((response)=>response.json()).then((data)=>{
+  //   console.log(data);
+  //   userObj.users=data;
+  // });
+  loaddestination();
+})
+
+function loaddestination() {
 
     axios.get('http://localhost:3000/destination')
-    .then((response)=>{
-      console.log(response.data);
-      destinationObj.destinationList=response.data;
-    })
-  })
+      .then((response) => {
+        console.log(response.data);
+        destinationObj.destinationList = response.data;
+      })
+  }
 
 </script>
