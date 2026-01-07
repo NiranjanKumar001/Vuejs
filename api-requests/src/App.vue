@@ -1,20 +1,40 @@
 <template>
   <div>
-    Requesting API data using Axios
+    Travelopedia
   </div>
   <hr/>
-  <div v-for="user in userObj.users" :key="user.id">
-    <p>{{ user.name }}</p>
-    <p>{{ user.email }}</p>
+  <table class="table table-striped table-light">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Days</th>
+        <!-- <th scope="col">Fun Facts</th> -->
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="destination in destinationObj.destinationList" :key="destination.id">
+        <td>{{ destination.name }}</td>
+        <td>{{ destination.days }}</td>
+        <!-- <td>{{ destination.funfacts }}</td> -->
+        <td>{{ destination.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div v-for="destination in destinationObj.destinationList" :key="destination.id">
+    <p>{{ destination.name }}</p>
+    <p>{{ destination.days }}</p>
+    <p>{{ destination.funfacts }}</p>
+    <p>{{ destination.price }}</p>
     <hr/>
-  </div>
+  </div> -->
 </template>
 <script setup>
 import axios from 'axios';
 import { reactive,onMounted } from 'vue';
 
-  const userObj=reactive({
-    users:[]
+  const destinationObj=reactive({
+    destinationList:[],
   });
 
   onMounted(async()=>{
@@ -24,11 +44,11 @@ import { reactive,onMounted } from 'vue';
     //   userObj.users=data;
     // });
 
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get('http://localhost:3000/destination')
     .then((response)=>{
       console.log(response.data);
-      userObj.users=response.data;
+      destinationObj.destinationList=response.data;
     })
   })
-  
+
 </script>
