@@ -1,47 +1,28 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    Requesting API data using Axios
+  </div>
+  <hr/>
+  <div v-for="user in userObj.users" :key="user.id">
+    <p>{{ user.name }}</p>
+    <p>{{ user.email }}</p>
+    <hr/>
+  </div>
 </template>
+<script setup>
+import axios from 'axios';
+import { reactive,onMounted } from 'vue';
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+  const userObj=reactive({
+    users:[]
+  });
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+  onMounted(async()=>{
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+    axios.get('https://jsonplaceholder.typicode.com/users')
+    .then((response)=>{
+      console.log(response.data);
+      userObj.users=response.data;
+    })
+  })
+</script>
